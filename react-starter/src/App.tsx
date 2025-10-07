@@ -31,7 +31,7 @@ function NavigationMenuDemo() {
         </NavigationMenuItem>
                 <NavigationMenuItem>
           <NavigationMenuLink asChild>
-            <Link to="/WatchList">View Watchlist</Link>
+            <Link to="/components/ui/WatchList">View Watchlist</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
