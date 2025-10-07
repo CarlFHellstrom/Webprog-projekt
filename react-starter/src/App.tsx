@@ -10,6 +10,7 @@ function App() {
         Hello tailwind world!
       </h1>
       <Button variant="outline">Hello shadcn world</Button>
+      {NavigationMenuDemo()}
     </>
   );
 }
