@@ -10,7 +10,7 @@ export type SearchParams = {
   year?: string;        // y=
   type?: MediaType;     // type=
   page?: number;        // page= (1..100)
-  imdbID?: string;      // i=
+  imdbID?: string;      // i= 
 };
 
 export type SearchItem = {
@@ -18,7 +18,6 @@ export type SearchItem = {
   Year: string;
   imdbID: string;
   Type: MediaType;
-  Poster: string;
 };
 
 export type SearchResponse = {
