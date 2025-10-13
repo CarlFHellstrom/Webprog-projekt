@@ -5,7 +5,6 @@ import App from './App.tsx'
 import {createBrowserRouter} from 'react-router'
 import {RouterProvider} from "react-router/dom"
 
-import  ComposeWatchlist  from './pages/ComposeWatchlist.tsx';
 import  ViewWatchlist  from './pages/ViewWatchlist.tsx';
 import  SearchMedia  from './pages/SearchMedia.tsx';
 import  SearchResult  from './pages/SearchResult.tsx';
@@ -17,10 +16,6 @@ const routerConfig = [
       {
         index: true,
         Component: Home,
-      },
-      {
-        path: "pages/ComposeWatchlist",
-        Component: ComposeWatchlist,
       },
       {
         path: "pages/ViewWatchlist",
