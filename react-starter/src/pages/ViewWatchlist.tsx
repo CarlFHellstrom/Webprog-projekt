@@ -38,7 +38,7 @@ import { Badge } from "../components/ui/badge";
 import { Alert, AlertTitle } from "../components/ui/alert";
 
 //type PropsType = { watchlist: Watchlist };
-function ViewCart() {
+function ViewWatchlist() {
   //const { watchlist } = useOutletContext<PropsType>();
   const { uuid } = useParams();
 
@@ -57,7 +57,7 @@ function ViewCart() {
                 </TableRow>
                 <TableRow key={2}>
                   <TableCell className="font-normal">
-                    hej2
+                    <span>hej2</span>
                   </TableCell>
                 </TableRow>
             </TableBody>
@@ -104,4 +104,6 @@ const cardHead = (
     <CardDescription>Här är alla filmer.</CardDescription>
   </CardHeader>
 );
-export default ViewCart;
+
+
+export default ViewWatchlist;
