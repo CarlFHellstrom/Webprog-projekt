@@ -12,7 +12,7 @@ import type {
 import React, { useState, type FormEvent } from 'react';
 import { Label } from '../components/ui/label';
 
-export default function SearchMedia() {
+function SearchMedia() {
     const [title, setTitle] = useState('');
     const [year, setYear] = useState('');
     const [imdbId, setImdbId] = useState('');
@@ -123,3 +123,5 @@ function SelectParamType<T extends string | number>({
         </div>
     );
 }
+
+export default SearchMedia;
