@@ -34,7 +34,6 @@ import { useState } from "react";
 import { access } from "fs";
 import { useOutletContext } from "react-router";
 import { useParams } from "react-router";
-import { Badge } from "../components/ui/badge";
 import { Alert, AlertTitle } from "../components/ui/alert";
 
 //type PropsType = { watchlist: Watchlist };
