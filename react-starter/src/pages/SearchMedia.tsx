@@ -10,7 +10,7 @@ import type {
     FullItem,
 } from '@/lib/omdb'
 import React, { useState, type FormEvent } from 'react';
-import { Label } from './components/ui/label';
+import { Label } from '../components/ui/label';
 
 export default function SearchMedia() {
     const [title, setTitle] = useState('');
