@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { searchMedia, getById, type MediaType, type SearchItem, type FullItem } from "@/lib/omdb";
 import { Button } from "../components/ui/button";
+import { useWatchlist } from "@/state/watchlist";
 
 function SearchResults() {
     const [params, setParams] = useSearchParams();
@@ -115,7 +116,7 @@ function SearchResults() {
             {open ? "Hide" : "Show more"}
           </Button>
         </div>
-        
+
         {open && (
           <div className="mt-3">
             {loading && <p>Loading details…</p>}
