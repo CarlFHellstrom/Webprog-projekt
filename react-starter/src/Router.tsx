@@ -5,13 +5,49 @@ import App from './App.tsx'
 import {createBrowserRouter} from 'react-router'
 import {RouterProvider} from "react-router/dom"
 
-const router = createBrowserRouter([
+import { ComposeWatchlist } from './pages/ComposeWatchlist.tsx';
+import { ViewWatchlist } from './pages/ViewWatchlist.tsx';
+import { SearchMedia } from './pages/SearchMedia.tsx';
+import { SearchResult } from './pages/SearchResult.tsx';
+
+const routerConfig = [
   {
-    path: '/*',
     Component: App,
-  }]);
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
-);
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: "pages/ComposeWatchlist",
+        Component: ComposeWatchlist,
+      },
+      {
+        path: "pages/ViewWatchlist",
+        Component: ViewWatchlist,
+      },
+      {
+        path: "pages/SearchMedia",
+        Component: SearchMedia,
+      },
+      {
+        path: "pages/SearchResult",
+        Component: SearchResult,
+      },
+      {
+        path: "*",
+        Component: PageNotFound,
+      }
+    ],
+  },
+];
+
+function Home() {
+  return <h2 className="text-xl font-bold text-center ">Welcome</h2>;
+}
+
+function PageNotFound() {
+  return <h2>Page not found</h2>;
+}
+
+export default routerConfig;
