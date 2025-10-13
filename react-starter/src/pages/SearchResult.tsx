@@ -2,106 +2,22 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { searchMedia, getById, type MediaType, type SearchItem, type FullItem } from "../lib/omdb";
 import { Button } from "../components/ui/button";
+import { useWatchlist } from "@/state/watchlist";
 
 function SearchResults() {
-  const [params, setParams] = useSearchParams();
+    const [params, setParams] = useSearchParams();
+    const query  = (params.get("query")  ?? "").trim();
+    const year   = (params.get("year")   ?? "").trim();
+    const imdbId = (params.get("imdbId") ?? "").trim();
+    const type   = (params.get("type")   ?? "") as MediaType | "";
+    const page   = Math.max(1, Math.min(100, Number(params.get("page") ?? "1")));
 
-  function ResultCard({ item }: { item: SearchItem }) {
-    const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [err, setErr] = useState<string | null>(null);
-    const [details, setDetails] = useState<FullItem | null>(null);
+    const [error, setError] = useState<string | null>(null);
+    const [items, setItems] = useState<SearchItem[]>([]);
+    const [single, setSingle] = useState<FullItem | null>(null);
 
-    async function toggle() {
-        if (open) {
-        setOpen(false);
-        return;
-        }
-        setOpen(true);
-        if (details) return;
-
-        setLoading(true);
-        setErr(null);
-        try {
-        const data = await getById(item.imdbID);
-        setDetails(data);
-        } catch (e: any) {
-        setErr(e?.message ?? "Failed to load details.");
-        } finally {
-        setLoading(false);
-        }
-    }
-        return (
-            <li className="border rounded p-3">
-            <p className="font-medium">
-                {item.Title} ({item.Year}) — {item.Type}
-            </p>
-
-
-
-            <div className="mt-3 flex gap-2">
-                <Button
-                variant={"outline"}
-                onClick={toggle}
-                aria-expanded={open}
-                >
-                {open ? "Hide" : "Show more"}
-                </Button>
-            </div>
-
-            {open && (
-                <div className="mt-3">
-                {loading && <p>Loading details…</p>}
-                {err && <p className="text-red-600">{err}</p>}
-                {details && !loading && !err && (
-                    <div className="text-sm space-y-2">
-                    {details.Plot && <p className="leading-relaxed">{details.Plot}</p>}
-
-                    <div className="grid grid-cols-2 gap-x-4 gap-y-1">
-                        {details.Genre && (
-                        <div><span className="font-medium">Genre:</span> {details.Genre}</div>
-                        )}
-                        {details.Runtime && (
-                        <div><span className="font-medium">Runtime:</span> {details.Runtime}</div>
-                        )}
-                        {details.Released && (
-                        <div><span className="font-medium">Released:</span> {details.Released}</div>
-                        )}
-                        {details.Director && (
-                        <div><span className="font-medium">Director:</span> {details.Director}</div>
-                        )}
-                        {details.Actors && (
-                        <div className="col-span-2">
-                            <span className="font-medium">Actors:</span> {details.Actors}
-                        </div>
-                        )}
-                        {details.imdbRating && (
-                        <div><span className="font-medium">IMDb:</span> {details.imdbRating} ({details.imdbVotes} votes)</div>
-                        )}
-                        {details.Awards && (
-                        <div className="col-span-2"><span className="font-medium">Awards:</span> {details.Awards}</div>
-                        )}
-                    </div>
-                    </div>
-                )}
-                </div>
-            )}
-            </li>
-        );
-    }
-
-  const query  = (params.get("query")  ?? "").trim();
-  const year   = (params.get("year")   ?? "").trim();
-  const imdbId = (params.get("imdbId") ?? "").trim();
-  const type   = (params.get("type")   ?? "") as MediaType | "";
-  const page   = Math.max(1, Math.min(100, Number(params.get("page") ?? "1")));
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [items, setItems] = useState<SearchItem[]>([]);
-  const [single, setSingle] = useState<FullItem | null>(null);
-
-  useEffect(() => {
+    useEffect(() => {
     let cancelled = false;
     (async () => {
       setLoading(true);
@@ -136,11 +52,93 @@ function SearchResults() {
     })();
     return () => { cancelled = true; };
   }, [query, year, type, imdbId, page]);
-  
-function setPage(next: number) {
+
+  function setPage(next: number) {
     const nextParams = new URLSearchParams(params);
     nextParams.set("page", String(next));
     setParams(nextParams);
+  }
+
+  function ResultCard({ item }: { item: SearchItem }) {
+    const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [err, setErr] = useState<string | null>(null);
+    const [details, setDetails] = useState<FullItem | null>(null);
+
+    const { has, add, remove } = useWatchlist();
+    const saved = has(item.imdbID);
+
+    async function toggle() {
+        if (open) {
+        setOpen(false);
+        return;
+        }
+        setOpen(true);
+        if (details) return;
+
+        setLoading(true);
+        setErr(null);
+        try {
+        const data = await getById(item.imdbID);
+        setDetails(data);
+        } catch (e: any) {
+        setErr(e?.message ?? "Failed to load details.");
+        } finally {
+        setLoading(false);
+        }
+    }
+        return (
+      <li className="border rounded p-3">
+        <p className="font-medium">
+          {item.Title} ({item.Year}) — {item.Type}
+        </p>
+
+        <div className="mt-3 flex gap-2 flex-wrap">
+          <Button
+            variant={saved ? "destructive" : "default"}
+            size="sm"
+            onClick={() => {
+              if (saved) {
+                remove(item.imdbID);
+              } else {
+                add({
+                  imdbID: item.imdbID,
+                  Title: item.Title,
+                  Year: item.Year,
+                  Type: item.Type,
+                });
+              }
+            }}
+          >
+            {saved ? "Remove from Watchlist" : "Add to Watchlist"}
+          </Button>
+          <Button variant="outline" size="sm" onClick={toggle} aria-expanded={open}>
+            {open ? "Hide" : "Show more"}
+          </Button>
+        </div>
+
+        {open && (
+          <div className="mt-3">
+            {loading && <p>Loading details…</p>}
+            {err && <p className="text-red-600">{err}</p>}
+            {details && !loading && !err && (
+              <div className="text-sm space-y-2">
+                {details.Plot && <p className="leading-relaxed">{details.Plot}</p>}
+                <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+                  {details.Genre && <div><span className="font-medium">Genre:</span> {details.Genre}</div>}
+                  {details.Runtime && <div><span className="font-medium">Runtime:</span> {details.Runtime}</div>}
+                  {details.Released && <div><span className="font-medium">Released:</span> {details.Released}</div>}
+                  {details.Director && <div><span className="font-medium">Director:</span> {details.Director}</div>}
+                  {details.Actors && <div className="col-span-2"><span className="font-medium">Actors:</span> {details.Actors}</div>}
+                  {details.imdbRating && <div><span className="font-medium">IMDb:</span> {details.imdbRating} ({details.imdbVotes} votes)</div>}
+                  {details.Awards && <div className="col-span-2"><span className="font-medium">Awards:</span> {details.Awards}</div>}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </li>
+    );
   }
 
   return (
@@ -168,25 +166,27 @@ function setPage(next: number) {
           </ul>
 
           <div className="flex items-center gap-2">
-            <button
+            <Button
+              variant="outline"
               disabled={page <= 1}
               onClick={() => setPage(page - 1)}
-              className="px-3 py-2 rounded border disabled:opacity-50"
             >
               Prev
-            </button>
+            </Button>
             <span className="text-sm">Page {page}</span>
-            <button
+            <Button
+              variant="outline"
               onClick={() => setPage(page + 1)}
-              className="px-3 py-2 rounded border"
             >
               Next
-            </button>
+            </Button>
           </div>
         </>
       )}
     </div>
   );
 }
+
+
 
 export default SearchResults;
