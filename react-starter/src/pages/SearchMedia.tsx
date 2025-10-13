@@ -9,6 +9,7 @@ import type {
     SearchItem,
     FullItem,
 } from '@/lib/omdb'
+
 import React, { useState, type FormEvent } from 'react';
 import { Label } from '../components/ui/label';
 
