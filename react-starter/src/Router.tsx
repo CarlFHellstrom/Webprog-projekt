@@ -9,7 +9,7 @@ import  ViewWatchlist  from './pages/ViewWatchlist.tsx';
 import  SearchMedia  from './pages/SearchMedia.tsx';
 import  SearchResult  from './pages/SearchResult.tsx';
 
-const routerConfig = [
+const router = createBrowserRouter([
   {
     Component: App,
     children: [
@@ -35,7 +35,7 @@ const routerConfig = [
       }
     ],
   },
-];
+]);
 
 function Home() {
   return <h2 className="text-xl font-bold text-center ">Welcome</h2>;
@@ -45,4 +45,4 @@ function PageNotFound() {
   return <h2>Page not found</h2>;
 }
 
-export default routerConfig;
+export default router;

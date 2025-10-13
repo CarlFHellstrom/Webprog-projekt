@@ -5,9 +5,9 @@ import App from './App.tsx'
 import {createBrowserRouter} from 'react-router'
 import {RouterProvider} from "react-router/dom"
 import Watchlist from './components/ui/Watchlist';
-import routerConfig from './Router.tsx'
+import router from './Router'
 
-const router = createBrowserRouter(routerConfig);
+//const routerConfig = createBrowserRouter(router);
 
 
 createRoot(document.getElementById('root')!).render(

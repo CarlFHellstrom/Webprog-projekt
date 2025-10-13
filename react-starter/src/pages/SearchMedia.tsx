@@ -29,7 +29,7 @@ function SearchMedia() {
         if (type) params.set("type", type);
         params.set("page", String(page || 1));
 
-        navigate(`/search?${params.toString()}`);        
+        navigate(`/pages/SearchResult?${params.toString()}`);
 
        /* setPage(1);
         setTitle('');
