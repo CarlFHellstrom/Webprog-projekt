@@ -3,6 +3,7 @@ This project is website for movies. The user can search for movies, make watchli
 ## Project Structure
 
 ### Source Code 
+```
 src/
 ├── App.tsx              # <beskrivning av App>
 ├── Router.tsx           # <beskrivning av Router>
