@@ -19,8 +19,7 @@ function App() {
       <h1 className="text-3xl font-bold underline mb-2">
         Movie list
       </h1>
-      {NavigationMenuDemo()}
-
+      <NavigationMenuDemo />
       <div className="mt-6">
         <Outlet context={{watchlist, addMovie}}/>
       </div>

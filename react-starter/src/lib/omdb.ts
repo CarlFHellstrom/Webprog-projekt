@@ -2,6 +2,12 @@ const API_KEY = import.meta.env.VITE_OMDB_API_KEY as string;
 
 const API_URL = "https://www.omdbapi.com/"
 
+if (!API_KEY) {
+  // Helpful guard during dev
+  // You can also console.warn here instead of throwing if you prefer
+  throw new Error("Missing OMDb API key. Set VITE_OMDB_API_KEY in .env.local and restart the dev server.");
+}
+
 export type MediaType = 'movie' | 'series' | 'episode'
 
 export type SearchParams = {
@@ -43,11 +49,11 @@ export type FullItem = SearchItem & {
   Metascore?: string;
   imdbRating?: string;
   imdbVotes?: string;
-  totalSeasons?: string; // for series
+  totalSeasons?: string;
 };
 
 function buildURL(params: Record<string, string | number | undefined>) {
-  const url = new URL('API_BASE');
+  const url = new URL(API_URL);
   url.searchParams.set('apikey', API_KEY);
   Object.entries(params).forEach(([k, v]) => {
     if (v !== undefined && v !== '') url.searchParams.set(k, String(v));

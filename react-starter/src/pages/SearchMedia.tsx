@@ -7,7 +7,7 @@ import type {
 
 import React, { useState, type FormEvent } from 'react';
 import { Label } from '../components/ui/label';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 function SearchMedia() {
     const [title, setTitle] = useState('');
