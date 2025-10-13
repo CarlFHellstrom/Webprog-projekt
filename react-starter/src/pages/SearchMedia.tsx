@@ -6,7 +6,7 @@ import type {
 } from '@/lib/omdb'
 
 import React, { useState, type FormEvent } from 'react';
-import { Label } from './components/ui/label';
+import { Label } from '../components/ui/label';
 import { useNavigate } from 'react-router';
 
 function SearchMedia() {
