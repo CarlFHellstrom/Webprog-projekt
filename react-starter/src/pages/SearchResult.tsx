@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { searchMedia, getById, type MediaType, type SearchItem, type FullItem } from "@/lib/omdb";
+import { searchMedia, getById, type MediaType, type SearchItem, type FullItem } from "../lib/omdb";
 import { Button } from "../components/ui/button";
 
 function SearchResults() {

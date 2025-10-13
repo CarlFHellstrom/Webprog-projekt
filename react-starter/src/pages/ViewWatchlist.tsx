@@ -36,7 +36,7 @@ import { useOutletContext } from "react-router";
 import { useParams } from "react-router";
 import { Badge } from "../components/ui/badge";
 import { Alert, AlertTitle } from "../components/ui/alert";
-import { searchMedia, getById, type MediaType, type SearchItem, type FullItem } from "@/lib/omdb";
+import { searchMedia, getById, type MediaType, type SearchItem, type FullItem } from "../lib/omdb";
 import { Media } from '../lib/media'
 
 type PropsType = { watchlist: Media[] };

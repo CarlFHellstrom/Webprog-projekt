@@ -29,25 +29,27 @@ function App() {
 
 function NavigationMenuDemo() {
   return (
+    <div className="flex items-centre justify-centre gap-4">
     <NavigationMenu>
-      <NavigationMenuList>
+      <NavigationMenuList className="flex flex-row gap-4">
         <NavigationMenuItem>
           <NavigationMenuLink asChild>
-            <Link to="/">Homepage</Link>
+            <Link to="/" className="text-llg font-medium hover:text-green-600">Homepage</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
                 <NavigationMenuItem>
           <NavigationMenuLink asChild>
-            <Link to="pages/SearchMedia">Search Media</Link>
+            <Link to="pages/SearchMedia" className="text-llg font-medium hover:text-green-600">Search Media</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
                 <NavigationMenuItem>
           <NavigationMenuLink asChild>
-            <Link to="pages/ViewWatchlist">View Watchlist</Link>
+            <Link to="pages/ViewWatchlist" className="text-llg font-medium hover:text-green-600">View Watchlist</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
+    </div>
   )
   
 }
