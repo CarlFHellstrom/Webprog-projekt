@@ -1,8 +1,3 @@
-import {
-    searchMedia,
-    getById,
-} from '@/lib/omdb'
-
 import type {
     MediaType,
     SearchParams,
