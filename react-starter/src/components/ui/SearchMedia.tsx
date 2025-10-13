@@ -11,6 +11,7 @@ import type {
 } from '@/lib/omdb'
 import React, { useState, type FormEvent } from 'react';
 import { Label } from './label';
+import { useNavigate } from 'react-router';
 
 export default function SearchMedia() {
     const [title, setTitle] = useState('');
@@ -21,16 +22,25 @@ export default function SearchMedia() {
     //const [loading, setLoading] = useState(false);
     //const [error, setError] = useState<string | null>(null);
     
+    const navigate = useNavigate();
+
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
 
-        
+        const params = new URLSearchParams();
+        if (title.trim()) params.set("query", title.trim());
+        if (year.trim()) params.set("year", year.trim());
+        if (imdbId.trim()) params.set("imdbId", imdbId.trim());
+        if (type) params.set("type", type);
+        params.set("page", String(page || 1));
 
-        setPage(1);
+        navigate(`/search?${params.toString()}`);
+
+/*         setPage(1);
         setTitle('');
         setYear('');
         setImdbId('');
-        setType(undefined);
+        setType(undefined); */
     }
 
     return (
