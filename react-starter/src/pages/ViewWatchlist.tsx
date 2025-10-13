@@ -9,7 +9,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from "../components/ui/alert-dialog";
+
 import {
   Card,
   CardAction,
@@ -27,7 +28,7 @@ import {
   TableHeader,
   TableRow,
 } from "../components/ui/table";
-import { Watchlist } from "../model/Watchlist";
+//import { Watchlist } from "../model/Watchlist";
 import { CircleCheckIcon } from "lucide-react";
 import { useState } from "react";
 import { access } from "fs";
@@ -36,9 +37,9 @@ import { useParams } from "react-router";
 import { Badge } from "../components/ui/badge";
 import { Alert, AlertTitle } from "../components/ui/alert";
 
-type PropsType = { watchlist: Watchlist };
+//type PropsType = { watchlist: Watchlist };
 function ViewCart() {
-  const { watchlist } = useOutletContext<PropsType>();
+  //const { watchlist } = useOutletContext<PropsType>();
   const { uuid } = useParams();
 
   return (
@@ -46,41 +47,20 @@ function ViewCart() {
       <Card className="w-full p-3">
         {cardHead}
         <CardContent>
-            {isNewSalad && (
-              <Alert>
-              <CircleCheckIcon className="h-5 w-5 text-green-600" />
-              <AlertTitle>
-                En ny sallad har lagts till i varukorgen.
-              </AlertTitle>
-              </Alert>
-            )}
-
           <Table>
             {tableHead}
             <TableBody>
-              {watchlist.map((movie) => (
-                <TableRow key={movie.uuid}>
+                <TableRow key={1}>
                   <TableCell className="font-normal">
-                    {Object.keys(movie.ingredients).join(", ")}
-                  </TableCell>
-
-                  <TableCell className="font-normal text-right tabular-nums">
-                    {}
+                    hej
                   </TableCell>
                 </TableRow>
-              ))}
+                <TableRow key={2}>
+                  <TableCell className="font-normal">
+                    hej2
+                  </TableCell>
+                </TableRow>
             </TableBody>
-            
-            <TableFooter>
-              <TableRow>
-                <TableCell colSpan={4}>Totalt</TableCell>
-                <TableCell className="text-right tabular-nums">
-                  {cart.reduce((acc, current) => acc + current.price(), 0) +
-                    " kr"}
-                </TableCell>
-              </TableRow>
-            </TableFooter>
-
           </Table>
         </CardContent>
       </Card>
