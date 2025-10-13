@@ -3,7 +3,7 @@ import type {
     SearchParams,
     SearchItem,
     FullItem,
-} from '@/lib/omdb'
+} from '../lib/omdb'
 
 import React, { useState, type FormEvent } from 'react';
 import { Label } from '../components/ui/label';

@@ -1,5 +1,5 @@
 import { NavigationMenuContent, NavigationMenuLink, NavigationMenuTrigger, NavigationMenuItem, NavigationMenuList, NavigationMenu} from '@radix-ui/react-navigation-menu';
-import './App.css';
+import './styles/App.css';
 import { Button } from './components/ui/button';
 import { Link, Outlet, useOutletContext } from "react-router";
 
@@ -8,9 +8,8 @@ function App() {
   return (
     <>
       <h1 className="text-3xl font-bold underline mb-2">
-        Hello tailwind world!
+        Movie list
       </h1>
-      <Button variant="outline">Hello shadcn world</Button>
       {NavigationMenuDemo()}
     </>
   );
@@ -32,7 +31,7 @@ function NavigationMenuDemo() {
         </NavigationMenuItem>
                 <NavigationMenuItem>
           <NavigationMenuLink asChild>
-            <Link to="pages/WatchList">View Watchlist</Link>
+            <Link to="pages/ViewWatchList">View Watchlist</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
