@@ -3,9 +3,17 @@ import './styles/App.css';
 import './styles/App.css';
 import { Button } from './components/ui/button';
 import { Link, Outlet, useOutletContext } from "react-router";
+import { useState } from 'react';
+import { Media } from './lib/media'
 
 
 function App() {
+  const [watchlist, setWatchlist] = useState<Media[]>([]);
+
+  function addMovie(movie: Media) {
+    setWatchlist((state) => [...state, movie]);
+  }
+
   return (
     <>
       <h1 className="text-3xl font-bold underline mb-2">
@@ -14,7 +22,7 @@ function App() {
       {NavigationMenuDemo()}
 
       <div className="mt-6">
-        <Outlet />
+        <Outlet context={{watchlist, addMovie}}/>
       </div>
     </>
   );

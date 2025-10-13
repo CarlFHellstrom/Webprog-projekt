@@ -36,10 +36,13 @@ import { useOutletContext } from "react-router";
 import { useParams } from "react-router";
 import { Badge } from "../components/ui/badge";
 import { Alert, AlertTitle } from "../components/ui/alert";
+import { searchMedia, getById, type MediaType, type SearchItem, type FullItem } from "@/lib/omdb";
+import { Media } from '../lib/media'
 
-//type PropsType = { watchlist: Watchlist };
+type PropsType = { watchlist: Media[] };
+
 function ViewWatchlist() {
-  //const { watchlist } = useOutletContext<PropsType>();
+  const { watchlist } = useOutletContext<PropsType>();
   const { uuid } = useParams();
 
   return (
@@ -50,16 +53,26 @@ function ViewWatchlist() {
           <Table>
             {tableHead}
             <TableBody>
-                <TableRow key={1}>
+             { watchlist.map((movie) => (
+                <TableRow key={movie.title}>
                   <TableCell className="font-normal">
-                    hej
+                    movie.title
                   </TableCell>
-                </TableRow>
-                <TableRow key={2}>
+
                   <TableCell className="font-normal">
-                    <span>hej2</span>
+                    movie.genre
                   </TableCell>
+
+                  <TableCell className="font-normal">
+                    movie.runtime
+                  </TableCell>
+
+                  <TableCell className="font-normal">
+                    movie.rated
+                  </TableCell>
+
                 </TableRow>
+              ))}
             </TableBody>
           </Table>
         </CardContent>
@@ -71,29 +84,13 @@ function ViewWatchlist() {
 /*
  * static content, rendered when the file is loaded.
  */
-const orderButton = (
-  <AlertDialog>
-    <AlertDialogTrigger asChild>
-      <Button>Skicka beställningen</Button>
-    </AlertDialogTrigger>
-    <AlertDialogContent>
-      <AlertDialogHeader>
-        <AlertDialogTitle>Under utveckling</AlertDialogTitle>
-        <AlertDialogDescription>
-          Denna funktion implementeras under labb 4.
-        </AlertDialogDescription>
-      </AlertDialogHeader>
-      <AlertDialogFooter>
-        <AlertDialogCancel>Cancel</AlertDialogCancel>
-        <AlertDialogAction>Continue</AlertDialogAction>
-      </AlertDialogFooter>
-    </AlertDialogContent>
-  </AlertDialog>
-);
+
 const tableHead = (
   <TableHeader>
     <TableRow>
       <TableHead className="font-semibold">Movies</TableHead>
+      <TableHead className="font-semibold text-center">Genre</TableHead>
+      <TableHead className="font-semibold text-center">Runtime</TableHead>
       <TableHead className="font-semibold text-center">Rating</TableHead>
     </TableRow>
   </TableHeader>
