@@ -33,10 +33,11 @@ src/
     https://www.omdbapi.com/apikey.aspx 
     Press the FREE option and enter your email, First and Last name.
     By doing this you will recive an email with the key in it. Copy the key and 
-    into past it into .env.local instead of "your key" (without "").
+    paste it into .env.local instead of "your key" (without ""). 
+    VITE_OMDB_API_KEY=
         
         NOTE: You also have to activate the key with one of the links in the 
-        mail.
+        mail you recived.
 
 5: Go back to the terminal and make sure that you are still in react-starter/. 
     Here you will first run npm install to get all necassary node moduls. 
