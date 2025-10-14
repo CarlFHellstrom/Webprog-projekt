@@ -5,18 +5,27 @@ This project is website for movies. The user can search for movies, make watchli
 ### Source Code 
 ```
 src/
-├── App.tsx              # <beskrivning av App>
-├── Router.tsx           # <beskrivning av Router>
-├── Main.tsx             # <beskrivning av Main>
-├── assets/              # <beskrivning av assets/>
-│   ├── react.svg
+├── App.tsx              
+├── Router.tsx           
+├── Main.tsx             
+├── assets/              
+│   ├── logo.png
 │   └── ...
 ├── components/ui/        # Shared UI components
-│   └── alert.tsx
+│   └── alert-dialog.tsx
 │   └── ...
-├── lib/                 # <beskrivning av lib/>
+├── lib/                 
 │   ├── media.ts
 │   └── ...
+│
+├── pages/
+│   ├── SearchMedia.tsx  
+│   └── ...
+│
+├── state/
+│   ├── watchlist.ts    
+│   └── ...
+│
 └── styles/              # CSS styles 
     ├── App.css
     └── ...
