@@ -1,9 +1,9 @@
-import { NavigationMenuContent, NavigationMenuLink, NavigationMenuTrigger, NavigationMenuItem, NavigationMenuList, NavigationMenu} from '@radix-ui/react-navigation-menu';
+import { NavigationMenuLink, NavigationMenuItem, NavigationMenuList, NavigationMenu} from '@radix-ui/react-navigation-menu';
 import './styles/App.css';
-import { Button } from './components/ui/button';
-import { Link, Outlet, useOutletContext } from "react-router-dom";
+import { Link, Outlet} from "react-router-dom";
 import { useState } from 'react';
 import { Media } from './lib/media'
+import logo from './assets/logo.png';
 
 
 function App() {
@@ -14,15 +14,18 @@ function App() {
   }
 
   return (
-    <>
-      <h1 className="text-3xl font-bold underline mb-2">
-        Watch Vault
-      </h1>
+    
+    <div className="flex flex-col items-center p-4">
+      <img
+        src={logo}
+        alt="Watch Vault logo"
+        className="w-90 h-90 object-contain mb-0"
+      />
       <NavigationMenuDemo />
-      <div className="mt-6">
+      <div className="mt-6 mb-6">
         <Outlet context={{watchlist, addMovie}}/>
       </div>
-    </>
+    </div>
   );
 }
 

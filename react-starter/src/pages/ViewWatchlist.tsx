@@ -1,19 +1,6 @@
 import { Button } from "../components/ui/button";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "../components/ui/alert-dialog";
-
-import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
@@ -28,19 +15,12 @@ import {
   TableHeader,
   TableRow,
 } from "../components/ui/table";
-//import { Watchlist } from "../model/Watchlist";
-import { CircleCheckIcon } from "lucide-react";
 import { useState } from "react";
-import { access } from "fs";
-import { useOutletContext } from "react-router";
-import { useParams } from "react-router";
-import { Alert, AlertTitle } from "../components/ui/alert";
 import { useWatchlist } from "@/state/watchlist";
 import { Badge } from "@/components/ui/badge";
 import { getById, type FullItem } from "@/lib/omdb";
 
 function ViewWatchlist() {
-  //const { watchlist } = useOutletContext<PropsType>();
 
   const { items, remove } = useWatchlist();
 
@@ -114,7 +94,7 @@ function ExpandableRow({
       return;
     }
     setOpen(true);
-    if (details) return; // already loaded once
+    if (details) return;
 
     setLoading(true);
     setErr(null);
@@ -207,27 +187,5 @@ return (
     </>
   );
 }
-
-/*
- * static content, rendered when the file is loaded.
- */
-
-const tableHead = (
-  <TableHeader>
-    <TableRow>
-      <TableHead className="font-semibold">Movies</TableHead>
-      <TableHead className="font-semibold text-center">Genre</TableHead>
-      <TableHead className="font-semibold text-center">Runtime</TableHead>
-      <TableHead className="font-semibold text-center">Rating</TableHead>
-    </TableRow>
-  </TableHeader>
-);
-const cardHead = (
-  <CardHeader>
-    <CardTitle>Watchlist</CardTitle>
-    <CardDescription>Här är alla filmer.</CardDescription>
-  </CardHeader>
-);
-
 
 export default ViewWatchlist;

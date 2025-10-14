@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import type { SearchItem } from "@/lib/omdb";
 
-export type WatchItem = Pick<SearchItem, "imdbID" | "Title" | "Year" | "Type"> & {
-  Poster?: string;
-};
+export type WatchItem = Pick<SearchItem, "imdbID" | "Title" | "Year" | "Type">
 
 const STORAGE_KEY = "watchlist:v1";
 

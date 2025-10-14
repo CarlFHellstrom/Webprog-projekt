@@ -1,8 +1,6 @@
 import './styles/index.css'
 import App from './App.tsx'
 import {createBrowserRouter} from 'react-router-dom'
-import {RouterProvider} from "react-router/dom"
-
 import  ViewWatchlist  from './pages/ViewWatchlist.tsx';
 import  SearchMedia  from './pages/SearchMedia.tsx';
 import  SearchResult  from './pages/SearchResult.tsx';

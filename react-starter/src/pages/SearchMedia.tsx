@@ -1,10 +1,4 @@
-import type {
-    MediaType,
-    SearchParams,
-    SearchItem,
-    FullItem,
-} from '../lib/omdb'
-
+import type {MediaType} from '../lib/omdb'
 import React, { useState, type FormEvent } from 'react';
 import { Label } from '../components/ui/label';
 import { useNavigate } from 'react-router-dom';
@@ -15,8 +9,7 @@ function SearchMedia() {
     const [imdbId, setImdbId] = useState('');
     const [page, setPage] = useState(1);
     const [type, setType] = useState<MediaType | undefined>();
-    //const [loading, setLoading] = useState(false);
-    //const [error, setError] = useState<string | null>(null);
+    
     const navigate = useNavigate();
     
     function handleSubmit(e: FormEvent) {
@@ -30,12 +23,6 @@ function SearchMedia() {
         params.set("page", String(page || 1));
 
         navigate(`/pages/SearchResult?${params.toString()}`);
-
-       /* setPage(1);
-        setTitle('');
-        setYear('');
-        setImdbId('');
-        setType(undefined); */
     }
 
     return (
