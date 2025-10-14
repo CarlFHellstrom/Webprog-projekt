@@ -1,4 +1,4 @@
-This project is website for movies. The user can search for movies, make watchlists, view watchlists and make a review for a movie. 
+This project is website for movies. 
 
 ## Project Structure
 
